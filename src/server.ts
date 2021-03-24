@@ -3,7 +3,7 @@ import DotEnv from 'dotenv';
 
 DotEnv.config();
 
-const { PORT } = process.env as any;
+const { PORT } = process.env.PORT as any;
 
 class Server {
 
