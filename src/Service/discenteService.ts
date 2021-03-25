@@ -6,7 +6,7 @@ export default class DiscenteService{
     }
 
     readAllDiscente():Discente[]{
-        return [new Discente()];
+        return new Discente().readAll();
     }
 
     readDiscenteById(id:String):Discente{

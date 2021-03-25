@@ -11,4 +11,9 @@ routes.post('/discentes', (req: Request, res: Response) => {
     res.json(discenteService.createDiscente(discente));
 });
 
+routes.get('/discentes', (req: Request, res: Response) => {
+    const discenteService = new DiscenteService();
+    res.json(discenteService.readAllDiscente());
+});
+
 export default routes;
