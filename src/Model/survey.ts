@@ -1,5 +1,6 @@
 import Crud from './crud';
 import { v4 as uuidv4 } from 'uuid';
+import { db } from '../app';
 
 export class Survey implements Crud{
     id?: String;
@@ -18,7 +19,12 @@ export class Survey implements Crud{
         }
     }
     create(): any {
-        throw new Error("Method not implemented.");
+        db.run(`INSERT INTO surveys(id,title,description,created_at) VALUES(?,?,?,?)`, [this.id, this.title, this.description, this.created_at], function (err) {
+            if (err) {
+                throw new Error(err.message);
+            }
+        });
+        return this;
     }
     readById(id: String): any {
         throw new Error("Method not implemented.");

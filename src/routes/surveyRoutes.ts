@@ -11,4 +11,10 @@ routes.post('/surveys', (req: Request, res: Response) => {
     res.json(surveyService.createSurvey(survey));
 });
 
+routes.post('/sendEmail', (req: Request, res: Response) => {
+    const surveyService = new SurveyService();
+    const { email, id_survey} = req.body;
+    surveyService.sendEmail(email , id_survey);
+});
+
 export default routes;

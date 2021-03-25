@@ -1,8 +1,9 @@
+import { allowedNodeEnvironmentFlags } from "process";
 import { Survey } from "../Model/survey";
 
 export default class SurveyService{
     createSurvey(nova:Survey):Survey{
-        return new Survey();
+        return nova.create();
     }
 
     readAllSurvey():Survey[]{
