@@ -16,22 +16,22 @@ export class Answer implements Crud{
         if(created_at != null){
             this.created_at = created_at;
         }else{
-            this.created_at = new Date().toDateString();
+            this.created_at = new Date().toString();
         }
     }
-    create(novo: any): any {
+    create(): any {
         throw new Error("Method not implemented.");
     }
-    readById(id: number):any {
+    readById(id: String):any {
         throw new Error("Method not implemented.");
     }
     readAll(): any[] {
         throw new Error("Method not implemented.");
     }
-    update(objAtt: any): any {
+    update(): any {
         throw new Error("Method not implemented.");
     }
-    delete(id: number): any {
+    delete(id: String): any {
         throw new Error("Method not implemented.");
     }
 

@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS subjects(
+CREATE TABLE subjects(
     id TEXT,
     name TEXT,
     workload TEXT,
@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS subjects(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS students(
+CREATE TABLE students(
     id TEXT,
     name TEXT,
     email TEXT,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS students(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS surveys(
+CREATE TABLE surveys(
     id TEXT,
     title TEXT,
     description TEXT,
@@ -22,17 +22,16 @@ CREATE TABLE IF NOT EXISTS surveys(
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS students_subjects(
-    id TEXT,
+CREATE TABLE students_subjects(
     user_id TEXT,
     subject_id TEXT,
     created_at DATE,
-    PRIMARY KEY(id),
+    CONSTRAINT PK_students_subjects PRIMARY KEY (user_id,subject_id),
     FOREIGN KEY(user_id) REFERENCES students(id),
     FOREIGN KEY(subject_id) REFERENCES subjects(id)
 );
 
-CREATE TABLE IF NOT EXISTS surveys_students(
+CREATE TABLE surveys_students(
     id TEXT,
     user_id TEXT,
     survey_id TEXT,

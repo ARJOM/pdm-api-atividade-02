@@ -9,7 +9,7 @@ export default class SurveyService{
         return [new Survey()];
     }
 
-    readSurveyById(id:number):Survey{
+    readSurveyById(id:String):Survey{
         return new Survey();
     }
 
@@ -17,7 +17,7 @@ export default class SurveyService{
         return new Survey();
     }
 
-    deleteSurvey(id:number):Survey{
+    deleteSurvey(id:String):Survey{
         return new Survey();
     }
 

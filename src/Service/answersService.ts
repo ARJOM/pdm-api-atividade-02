@@ -17,15 +17,15 @@ export default class AnswerService{
         return new Answer();
     }
 
-    deleteAnswer(id:number):Answer{
+    deleteAnswer(id:String):Answer{
         return new Answer();
     }
 
-    darNota(id_discente:number,value:number):Answer{
+    darNota(id_discente:String,value:String):Answer{
         return new Answer();
     }
 
-    calcularNPS(id_survey:number):number{
+    calcularNPS(id_survey:String):number{
         return 1;
     }
 }

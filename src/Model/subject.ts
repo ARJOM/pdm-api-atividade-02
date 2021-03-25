@@ -15,29 +15,27 @@ export class Subject implements Crud {
         if (created_at != null) {
             this.created_at = created_at;
         } else {
-            this.created_at = new Date().toDateString();
+            this.created_at = new Date().toString();
         }
     }
-    create(novo: any): any {
-        db.run(`INSERT INTO subjects(name) VALUES(?)`, ['C'], function (err) {
+    create(): any {
+        db.run(`INSERT INTO subjects(id,name,workload,created_at) VALUES(?,?,?,?)`, [this.id, this.name, this.workload, this.created_at], function (err) {
             if (err) {
-                return console.log(err.message);
-            }
-            // get the last insert id
-            console.log(`A row has been inserted with rowid ${this.lastID}`);
+                return err.message;
+            } 
         });
-        throw new Error("Method not implemented.");
+        return this;
     }
-    readById(id: number): any {
+    readById(id: String): any {
         throw new Error("Method not implemented.");
     }
     readAll(): any[] {
         throw new Error("Method not implemented.");
     }
-    update(objAtt: any): any {
+    update(): any {
         throw new Error("Method not implemented.");
     }
-    delete(id: number): any {
+    delete(id: String): any {
         throw new Error("Method not implemented.");
     }
 }

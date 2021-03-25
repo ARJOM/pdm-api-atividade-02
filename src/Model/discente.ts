@@ -1,3 +1,4 @@
+import { db } from '../app';
 import Crud from './crud';
 import { Subject } from './subject';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,22 +18,37 @@ export class Discente implements Crud{
         if(created_at != null){
             this.created_at = created_at;
         }else{
-            this.created_at = new Date().toDateString();
+            this.created_at = new Date().toString();
         }
     }
-    create(novo: any): any {
-        throw new Error("Method not implemented.");
+    create(): any {
+        db.run(`INSERT INTO students(id,name,email,created_at) VALUES(?,?,?,?)`, [this.id, this.name, this.email, this.created_at], function (err) {
+            if (err) {
+                return err.message;
+            } 
+        });
+        if(this.subjects == undefined){
+            this.subjects = [];
+        }
+        for (let index = 0; index < this.subjects.length; index++) {
+            db.run(`INSERT INTO students_subjects(user_id,subject_id,created_at) VALUES(?,?,?)`, [this.id, this.subjects[index].id,new Date().toString()], function (err) {
+                if (err) {
+                    return err.message;
+                } 
+            });    
+        }
+        return this;
     }
-    readById(id: number) {
+    readById(id: String) {
         throw new Error("Method not implemented.");
     }
     readAll(): any[] {
         throw new Error("Method not implemented.");
     }
-    update(objAtt: any): any {
+    update(): any {
         throw new Error("Method not implemented.");
     }
-    delete(id: number): any {
+    delete(id: String): any {
         throw new Error("Method not implemented.");
     }
 

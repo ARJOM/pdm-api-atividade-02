@@ -1,7 +1,6 @@
 import express, { Express, json, Request, Response } from 'express';
 import Cors from 'cors';
 import sqlite3, { Database } from 'sqlite3';
-import { readFile } from 'fs';
 import Routes from './routes';
 
 interface AppConfig {
@@ -42,35 +41,30 @@ class App {
             workload TEXT,
             created_at DATE,
             PRIMARY KEY(id)
-        );
-        
-        CREATE TABLE IF NOT EXISTS students(
+        );`);
+        db.run(`CREATE TABLE IF NOT EXISTS students(
             id TEXT,
             name TEXT,
             email TEXT,
             created_at DATE,
             PRIMARY KEY(id)
-        );
-        
-        CREATE TABLE IF NOT EXISTS surveys(
+        );`);
+        db.run(`CREATE TABLE IF NOT EXISTS surveys(
             id TEXT,
             title TEXT,
             description TEXT,
             created_at DATE,
             PRIMARY KEY(id)
-        );
-        
-        CREATE TABLE IF NOT EXISTS students_subjects(
-            id TEXT,
+        );`);
+        db.run(`CREATE TABLE IF NOT EXISTS students_subjects(
             user_id TEXT,
             subject_id TEXT,
             created_at DATE,
-            PRIMARY KEY(id),
+            CONSTRAINT PK_students_subjects PRIMARY KEY (user_id,subject_id),
             FOREIGN KEY(user_id) REFERENCES students(id),
             FOREIGN KEY(subject_id) REFERENCES subjects(id)
-        );
-        
-        CREATE TABLE IF NOT EXISTS surveys_students(
+        );`);
+        db.run(`CREATE TABLE IF NOT EXISTS surveys_students(
             id TEXT,
             user_id TEXT,
             survey_id TEXT,
@@ -79,8 +73,8 @@ class App {
             PRIMARY KEY(id),
             FOREIGN KEY(user_id) REFERENCES students(id),
             FOREIGN KEY(survey_id) REFERENCES surveys(id)
-        );
-        `);
+        );`);
+        //db.run('delete from subjects');
     }
 
     private routes(): void{
