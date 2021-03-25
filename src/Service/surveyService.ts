@@ -1,6 +1,6 @@
 import { Survey } from "../Model/survey";
 
-class SurveyService{
+export default class SurveyService{
     createSurvey(nova:Survey):Survey{
         return new Survey();
     }

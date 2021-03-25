@@ -6,7 +6,7 @@ const routes = Router();
 
 
 routes.post('/subjects', (req: Request, res: Response) => {
-    // const subjectService = new SubjectService();
+    const subjectService = new SubjectService();
     // const { workload, name } = req.body;
     // const subject = new Subject(name, workload);
     // res.json(subjectService.createSubject(subject));

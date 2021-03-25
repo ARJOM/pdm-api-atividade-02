@@ -1,6 +1,6 @@
 import { Answer } from "../Model/answer";
 
-class AnswerService{
+export default class AnswerService{
     createAnswer(nova:Answer):Answer{
         return new Answer();
     }

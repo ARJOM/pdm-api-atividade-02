@@ -1,6 +1,6 @@
 import { Discente } from "../Model/discente";
 
-class DiscenteService{
+export default class DiscenteService{
     createDiscente(novo:Discente):Discente{
         return new Discente();
     }

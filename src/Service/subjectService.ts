@@ -1,6 +1,6 @@
 import { Subject }  from '../Model/subject';
 
-class SubjectService{
+export default class SubjectService{
     createSubject(nova:Subject):Subject{
         return new Subject();
     }
