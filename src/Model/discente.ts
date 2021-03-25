@@ -1,14 +1,16 @@
 import Crud from './crud';
 import { Subject } from './subject';
+import { v4 as uuidv4 } from 'uuid';
 
 export class Discente implements Crud{
-    id?: number;
+    id?: String;
     name?: String;
     email?: String;
     subjects?: Subject[];
     created_at?: String;
 
     constructor(name?:String,email?:String,subjects?:Subject[],created_at?:String){
+        this.id = uuidv4();
         this.email = email;
         this.name = name;
         this.subjects = subjects;

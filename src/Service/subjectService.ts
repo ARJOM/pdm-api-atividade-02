@@ -2,7 +2,7 @@ import { Subject }  from '../Model/subject';
 
 export default class SubjectService{
     createSubject(nova:Subject):Subject{
-        return new Subject();
+        return nova.create(nova);
     }
 
     readAllSubject():Subject[]{

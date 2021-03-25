@@ -1,12 +1,14 @@
 import Crud from './crud';
+import { v4 as uuidv4 } from 'uuid';
 
 export class Survey implements Crud{
-    id?: number;
+    id?: String;
     title?: String;
     description?: String;
     created_at?: String;
 
     constructor(title?:String,description?:String,created_at?:String){
+        this.id = uuidv4();
         this.title = title;
         this.description = description;
         if(created_at != null){
