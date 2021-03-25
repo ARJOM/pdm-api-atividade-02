@@ -14,9 +14,9 @@ export class Discente implements Crud {
         this.id = uuidv4();
         this.email = email;
         this.name = name;
-        if(subjects = undefined){
+        if (subjects = undefined) {
             this.subjects = [];
-        }else{
+        } else {
             this.subjects = subjects;
         };
         if (created_at != null) {
@@ -43,37 +43,34 @@ export class Discente implements Crud {
         }
         return this;
     }
-    readById(id: String) {
+    readById(id: String): any {
         throw new Error("Method not implemented.");
     }
-    readAll(): any[] {
-        let result:Discente[] = [];
+    readAll(): any {
+        let result: Discente[] = [];
         db.all(`Select * from students`, (err, rows) => {
             if (err) {
                 return err;
             }
             rows.forEach((row) => {
-                let disc:Discente = row;
+                let disc: Discente = row;
                 disc.subjects = [];
                 db.all(`Select subs.id as id,subs.name as name,subs.workload as workload,subs.created_at as created_at
                 from subjects as subs inner join students_subjects as stsubs
                 on subs.id = stsubs.subject_id
-                where stsubs.user_id = ?`,[disc.id],(err, rows)=>{
-                    if(err){
+                where stsubs.user_id = ?`, [disc.id], (err, rows) => {
+                    if (err) {
                         return err;
                     }
-                    rows.forEach((row)=>{
-                        let sub:Subject = row;
-                        disc.subjects.push(sub);
+                    rows.forEach((row) => {
+                        let sub: Subject = row;
+                        disc.subjects?.push(sub);
                     });
                     result.push(disc);
-                    console.log(result);
                 })
+                return result;
             });
-            console.log("oi");
-            return result;
         });
-        return result;
     }
     update(): any {
         throw new Error("Method not implemented.");

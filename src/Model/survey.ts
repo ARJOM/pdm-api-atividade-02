@@ -23,7 +23,7 @@ export class Survey implements Crud{
     readById(id: String): any {
         throw new Error("Method not implemented.");
     }
-    readAll(): any[] {
+    readAll(): any {
         throw new Error("Method not implemented.");
     }
     update(): boolean {
