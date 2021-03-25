@@ -1,4 +1,6 @@
-class Subject implements Crud{
+import Crud from './crud';
+
+export class Subject implements Crud{
     id?: number;
     name?: String;
     workload?: String;
@@ -10,7 +12,7 @@ class Subject implements Crud{
         if(created_at != null){
             this.created_at = created_at;
         }else{
-            this.created_at = Date.now().toString();
+            this.created_at = new Date().toString();
         }
     }
     create(novo: any): boolean {

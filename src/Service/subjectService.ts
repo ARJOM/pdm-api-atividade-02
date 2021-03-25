@@ -1,3 +1,5 @@
+import { Subject }  from '../Model/subject';
+
 class SubjectService{
     createSubject(nova:Subject):boolean{
         return true;

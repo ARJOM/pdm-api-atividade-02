@@ -1,4 +1,6 @@
-class Answer implements Crud{
+import Crud from './crud';
+
+export class Answer implements Crud{
     id?: number;
     id_survey?: number;
     id_discente?: number;

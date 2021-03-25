@@ -1,4 +1,7 @@
-class Discente implements Crud{
+import Crud from './crud';
+import { Subject } from './subject';
+
+export class Discente implements Crud{
     id?: number;
     name?: String;
     email?: String;

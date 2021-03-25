@@ -1,4 +1,4 @@
-interface Crud{
+export default interface Crud{
     create(novo:any):boolean;
     readById(id:number):any;
     readAll():[any];

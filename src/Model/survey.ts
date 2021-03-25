@@ -1,4 +1,6 @@
-class Survey implements Crud{
+import Crud from './crud';
+
+export class Survey implements Crud{
     id?: number;
     title?: String;
     description?: String;
