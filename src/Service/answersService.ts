@@ -1,9 +1,11 @@
+import { Answer } from "../Model/answer";
+
 class AnswerService{
-    createAnswer(nova:Answer):boolean{
-        return true;
+    createAnswer(nova:Answer):Answer{
+        return new Answer();
     }
 
-    readAllAnswer():[Answer]{
+    readAllAnswer():Answer[]{
         return [new Answer()];
     }
 
@@ -11,16 +13,16 @@ class AnswerService{
         return new Answer();
     }
 
-    updateAnswer(answerAtt:Answer):boolean{
-        return true;
+    updateAnswer(answerAtt:Answer):Answer{
+        return new Answer();
     }
 
-    deleteAnswer(id:number):boolean{
-        return true;
+    deleteAnswer(id:number):Answer{
+        return new Answer();
     }
 
-    darNota(id_discente:number,value:number):boolean{
-        return true;
+    darNota(id_discente:number,value:number):Answer{
+        return new Answer();
     }
 
     calcularNPS(id_survey:number):number{

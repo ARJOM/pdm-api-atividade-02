@@ -1,7 +1,7 @@
 export default interface Crud{
-    create(novo:any):boolean;
+    create(novo:any):any;
     readById(id:number):any;
-    readAll():[any];
-    update(objAtt:any):boolean;
-    delete(id:number):boolean;
+    readAll():any[];
+    update(objAtt:any):any;
+    delete(id:number):any;
 }

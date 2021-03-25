@@ -1,9 +1,11 @@
+import { Survey } from "../Model/survey";
+
 class SurveyService{
-    createSurvey(nova:Survey):boolean{
-        return true;
+    createSurvey(nova:Survey):Survey{
+        return new Survey();
     }
 
-    readAllSurvey():[Survey]{
+    readAllSurvey():Survey[]{
         return [new Survey()];
     }
 
@@ -11,12 +13,12 @@ class SurveyService{
         return new Survey();
     }
 
-    updateSurvey(surveyAtt:Survey):boolean{
-        return true;
+    updateSurvey(surveyAtt:Survey):Survey{
+        return new Survey();
     }
 
-    deleteSurvey(id:number):boolean{
-        return true;
+    deleteSurvey(id:number):Survey{
+        return new Survey();
     }
 
     sendEmail(email:String,id_survey:number):boolean{

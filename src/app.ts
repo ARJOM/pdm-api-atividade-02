@@ -28,7 +28,7 @@ class App {
     }
 
     private connectDatabase(): void{
-        db = new sqlite3.Database('DB.db', (err) => {
+        db = new sqlite3.Database('DB.db', (err:any) => {
             if (err) {
               console.log('Could not connect to database', err)
             } else {

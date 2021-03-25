@@ -1,11 +1,11 @@
 import { Subject }  from '../Model/subject';
 
 class SubjectService{
-    createSubject(nova:Subject):boolean{
-        return true;
+    createSubject(nova:Subject):Subject{
+        return new Subject();
     }
 
-    readAllSubject():[Subject]{
+    readAllSubject():Subject[]{
         return [new Subject()];
     }
 
@@ -13,11 +13,11 @@ class SubjectService{
         return new Subject();
     }
 
-    updateSubject(subjectAtt:Subject):boolean{
-        return true;
+    updateSubject(subjectAtt:Subject):Subject{
+        return new Subject();
     }
 
-    deleteSubject(id:number):boolean{
-        return true;
+    deleteSubject(id:number):Subject{
+        return new Subject();
     }
 }

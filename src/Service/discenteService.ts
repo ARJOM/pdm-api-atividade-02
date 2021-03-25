@@ -1,9 +1,11 @@
+import { Discente } from "../Model/discente";
+
 class DiscenteService{
-    createDiscente(novo:Discente):boolean{
-        return true;
+    createDiscente(novo:Discente):Discente{
+        return new Discente();
     }
 
-    readAllDiscente():[Discente]{
+    readAllDiscente():Discente[]{
         return [new Discente()];
     }
 
@@ -11,12 +13,12 @@ class DiscenteService{
         return new Discente();
     }
 
-    updateDiscente(discenteAtt:Discente):boolean{
-        return true;
+    updateDiscente(discenteAtt:Discente):Discente{
+        return new Discente();
     }
 
-    deleteDiscente(id:number):boolean{
-        return true;
+    deleteDiscente(id:number):Discente{
+        return new Discente();
     }
 
 }
