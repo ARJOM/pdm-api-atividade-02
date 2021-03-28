@@ -13,7 +13,23 @@ routes.post('/discentes', (req: Request, res: Response) => {
 
 routes.get('/discentes', (req: Request, res: Response) => {
     const discenteService = new DiscenteService();
-    res.json(discenteService.readAllDiscente());
+    const result:Promise<any> = discenteService.readAllDiscente();
+    result.then((reso:Promise<any>)=>{
+        res.json(reso);
+    }).catch((rej)=>{
+        res.json(rej);
+    })
+});
+
+routes.get('/discentes/:id', (req: Request, res: Response) => {
+    const discenteService = new DiscenteService();
+    const id = req.params.id.split('=');
+    const result:Promise<any> = discenteService.readDiscenteById(id[1]);
+    result.then((reso:Promise<any>)=>{
+        res.json(reso);
+    }).catch((rej)=>{
+        res.json(rej);
+    })
 });
 
 export default routes;

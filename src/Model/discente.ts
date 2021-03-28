@@ -2,12 +2,13 @@ import { db } from '../app';
 import Crud from './crud';
 import { Subject } from './subject';
 import { v4 as uuidv4 } from 'uuid';
+import { } from 'sqlite3';
 
-export class Discente implements Crud {
+export class Discente {
     id?: String;
     name?: String;
     email?: String;
-    subjects?: Subject[];
+    subjects?: Subject[] = [];
     created_at?: String;
 
     constructor(name?: String, email?: String, subjects?: Subject[], created_at?: String) {
@@ -43,32 +44,36 @@ export class Discente implements Crud {
         }
         return this;
     }
-    readById(id: String): any {
-        throw new Error("Method not implemented.");
+    readById(id: String): Promise<any> {
+        const sub: Subject = new Subject();
+        return new Promise((resolve, reject) => {
+            db.get(`Select * from students where id = ?`,id, (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    let discente: Discente = new Discente();
+                    discente = row;
+                    let discentes: Discente[] = [];
+                    discentes.push(discente)
+                    resolve(sub.readByStudents(discentes));
+                }
+            });
+        });
     }
-    readAll(): any {
-        let result: Discente[] = [];
-        db.all(`Select * from students`, (err, rows) => {
-            if (err) {
-                return err;
-            }
-            rows.forEach((row) => {
-                let disc: Discente = row;
-                disc.subjects = [];
-                db.all(`Select subs.id as id,subs.name as name,subs.workload as workload,subs.created_at as created_at
-                from subjects as subs inner join students_subjects as stsubs
-                on subs.id = stsubs.subject_id
-                where stsubs.user_id = ?`, [disc.id], (err, rows) => {
-                    if (err) {
-                        return err;
-                    }
+    readAll(): Promise<any> {
+        const sub: Subject = new Subject();
+        return new Promise((resolve, reject) => {
+            db.all(`Select * from students`, (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    let discentes: Discente[] = [];
                     rows.forEach((row) => {
-                        let sub: Subject = row;
-                        disc.subjects?.push(sub);
+                        let disc: Discente = row;
+                        discentes.push(disc);
                     });
-                    result.push(disc);
-                })
-                return result;
+                    resolve(sub.readByStudents(discentes));
+                }
             });
         });
     }

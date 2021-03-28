@@ -5,12 +5,12 @@ export default class DiscenteService{
         return novo.create();
     }
 
-    readAllDiscente():Discente[]{
+    readAllDiscente():Promise<any>{
         return new Discente().readAll();
     }
 
-    readDiscenteById(id:String):Discente{
-        return new Discente();
+    readDiscenteById(id:String):Promise<any>{
+        return new Discente().readById(id);
     }
 
     updateDiscente(discenteAtt:Discente):Discente{
