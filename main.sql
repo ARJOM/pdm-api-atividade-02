@@ -35,7 +35,7 @@ CREATE TABLE surveys_students(
     id TEXT,
     user_id TEXT,
     survey_id TEXT,
-    value TEXT,
+    value int,
     created_at DATE,
     PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES students(id),

@@ -47,15 +47,19 @@ export class Discente {
     readById(id: String): Promise<any> {
         const sub: Subject = new Subject();
         return new Promise((resolve, reject) => {
-            db.get(`Select * from students where id = ?`,id, (err, row) => {
+            db.get(`Select * from students where id = ?`, id, (err, row) => {
                 if (err) {
                     reject(err);
                 } else {
-                    let discente: Discente = new Discente();
-                    discente = row;
-                    let discentes: Discente[] = [];
-                    discentes.push(discente)
-                    resolve(sub.readByStudents(discentes));
+                    if (row == undefined) {
+                        reject(err);
+                    } else {
+                        let discente: Discente = new Discente();
+                        discente = row;
+                        let discentes: Discente[] = [];
+                        discentes.push(discente)
+                        resolve(sub.readByStudents(discentes));
+                    }
                 }
             });
         });

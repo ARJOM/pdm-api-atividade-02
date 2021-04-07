@@ -28,7 +28,7 @@ routes.get('/discentes/:id', (req: Request, res: Response) => {
     result.then((reso:Promise<any>)=>{
         res.json(reso);
     }).catch((rej)=>{
-        res.json(rej);
+        res.status(400).json({ error: 'Student does not exist' });
     })
 });
 

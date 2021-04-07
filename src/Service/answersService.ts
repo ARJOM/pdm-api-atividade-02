@@ -2,19 +2,23 @@ import { Answer } from "../Model/answer";
 
 export default class AnswerService{
     createAnswer(nova:Answer):Answer{
-        return new Answer();
+        return nova.create();
     }
 
     readAllAnswer():Answer[]{
         return [new Answer()];
     }
 
-    readAnswerById(id:number):Answer{
-        return new Answer();
+    readAnswerById(id:String):Promise<any>{
+        return new Answer().readById(id);
     }
 
-    updateAnswer(answerAtt:Answer):Answer{
-        return new Answer();
+    readAnswerByDiscenteId(id:String):Promise<any>{
+        return new Answer().readByDiscenteId(id);
+    }
+
+    updateAnswer(id:String,value:number):Promise<any>{
+        return new Answer().update(id,value);
     }
 
     deleteAnswer(id:String):Answer{
@@ -25,7 +29,7 @@ export default class AnswerService{
         return new Answer();
     }
 
-    calcularNPS(id_survey:String):number{
-        return 1;
+    calcularNPS(id_survey:String):Promise<any>{
+        return new Answer().calculateNps(id_survey);
     }
 }
