@@ -15,7 +15,7 @@ export class Discente {
         this.id = uuidv4();
         this.email = email;
         this.name = name;
-        if (subjects = undefined) {
+        if (subjects == undefined) {
             this.subjects = [];
         } else {
             this.subjects = subjects;
@@ -77,6 +77,23 @@ export class Discente {
                         discentes.push(disc);
                     });
                     resolve(sub.readByStudents(discentes));
+                }
+            });
+        });
+    }
+    readByEmail(email:String):Promise<any>{
+        return new Promise((resolve, reject) => {
+            db.get(`Select * from students where email = ?`, email, (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    if (row == undefined) {
+                        reject('Student does not exist');
+                    } else {
+                        let discente: Discente = new Discente();
+                        discente = row;
+                        resolve(discente);
+                    }
                 }
             });
         });

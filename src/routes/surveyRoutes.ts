@@ -14,7 +14,12 @@ routes.post('/surveys', (req: Request, res: Response) => {
 routes.post('/sendEmail', (req: Request, res: Response) => {
     const surveyService = new SurveyService();
     const { email, id_survey} = req.body;
-    surveyService.sendEmail(email , id_survey);
+    const result:Promise<any> = surveyService.sendEmail(email, id_survey);
+    result.then((reso:Promise<any>)=>{
+        res.status(200).json("Email enviado com sucesso!");
+    }).catch((rej)=>{
+        res.status(400).json({ error: rej });
+    })
 });
 
 export default routes;
