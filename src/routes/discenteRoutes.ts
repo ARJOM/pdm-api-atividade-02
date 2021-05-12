@@ -1,6 +1,8 @@
 import { Request, Response, Router } from 'express';
 import { Discente } from '../Model/discente';
 import DiscenteService from '../Service/discenteService';
+import jwt from 'jsonwebtoken';
+import { SECRET }  from '../utils/secret';
 
 const routes = Router();
 
@@ -31,5 +33,19 @@ routes.get('/discentes/:id', (req: Request, res: Response) => {
         res.status(400).json({ error: 'Student does not exist' });
     })
 });
+
+routes.post('/login', (req: Request, res: Response) => {
+    const discenteService = new DiscenteService();
+    const { email, password} = req.body;
+    if (discenteService.login(email, password)){
+        const token = jwt.sign({email}, SECRET, {
+            expiresIn: 3600000 // expires in 1 hour
+        });
+        return res.json({auth: true, token: token});
+    } else{
+        res.status(400).json({ error: 'Email ou senha incorretas' })
+    }
+
+})
 
 export default routes;

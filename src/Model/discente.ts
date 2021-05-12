@@ -1,5 +1,4 @@
 import { db } from '../app';
-import Crud from './crud';
 import { Subject } from './subject';
 import { v4 as uuidv4 } from 'uuid';
 import { } from 'sqlite3';
@@ -10,12 +9,14 @@ export class Discente {
     email?: String;
     subjects?: Subject[] = [];
     created_at?: String;
+    password?: String;
 
-    constructor(name?: String, email?: String, subjects?: Subject[], created_at?: String) {
+    constructor(name?: String, email?: String, subjects?: Subject[], created_at?: String, password?: String) {
         this.id = uuidv4();
         this.email = email;
         this.name = name;
-        if (subjects = undefined) {
+        process.env.SECRET
+        if (subjects == undefined) {
             this.subjects = [];
         } else {
             this.subjects = subjects;
@@ -27,7 +28,7 @@ export class Discente {
         }
     }
     create(): any {
-        db.run(`INSERT INTO students(id,name,email,created_at) VALUES(?,?,?,?)`, [this.id, this.name, this.email, this.created_at], function (err) {
+        db.run(`INSERT INTO students(id,name,password,email,created_at) VALUES(?,?,?,?,?)`, [this.id, this.name, this.password, this.email, this.created_at], function (err) {
             if (err) {
                 return err.message;
             }
@@ -44,6 +45,7 @@ export class Discente {
         }
         return this;
     }
+
     readById(id: String): Promise<any> {
         const sub: Subject = new Subject();
         return new Promise((resolve, reject) => {
@@ -88,4 +90,24 @@ export class Discente {
         throw new Error("Method not implemented.");
     }
 
+    getByEmailAndPassword(email: String, password: String) {
+        const sub: Subject = new Subject();
+        return new Promise((resolve, reject) => {
+            db.get(`Select * from students where email = ? and password = ?`, [email, password], (err, row) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    if (row == undefined) {
+                        reject(err);
+                    } else {
+                        let discente: Discente = new Discente();
+                        discente = row;
+                        let discentes: Discente[] = [];
+                        discentes.push(discente)
+                        resolve(sub.readByStudents(discentes));
+                    }
+                }
+            });
+        });
+    }
 }
