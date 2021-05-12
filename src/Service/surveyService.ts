@@ -22,7 +22,7 @@ export default class SurveyService{
         return new Survey();
     }
 
-    sendEmail(email:String,id_survey:number):boolean{
-        return true;
+    sendEmail(email:String,id_survey:String):Promise<any>{
+        return new Survey().sendEmail(email,id_survey);
     }
 }
