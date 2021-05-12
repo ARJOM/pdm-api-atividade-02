@@ -16,11 +16,14 @@ export default class DiscenteService{
 
     login(email: String, senha: String){
         const discente = new Discente()
-        let result = discente.getByEmailAndPassword(email, PasswordEncrypts.passwordEncrypt(senha));
-        if (!result){
-            return false;
-        }
-        return true;
+        const password = PasswordEncrypts.passwordEncrypt(senha)
+        return discente.getByEmailAndPassword(email, password)
+            .then(result => {
+                return true
+            })
+            .catch(error => {
+                return false
+            })
     }
 
     updateDiscente(discenteAtt:Discente):Discente{

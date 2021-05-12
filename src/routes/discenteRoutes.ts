@@ -3,13 +3,15 @@ import { Discente } from '../Model/discente';
 import DiscenteService from '../Service/discenteService';
 import jwt from 'jsonwebtoken';
 import { SECRET }  from '../utils/secret';
+import PasswordEncrypts from '../utils/passwordEncrypt';
 
 const routes = Router();
 
 routes.post('/discentes', (req: Request, res: Response) => {
     const discenteService = new DiscenteService();
-    const { name, email,subjects} = req.body;
-    const discente = new Discente(name, email,subjects);
+    const { name, email, password ,subjects} = req.body;
+    const passwordEncrypted = PasswordEncrypts.passwordEncrypt(password)
+    const discente = new Discente(name, email,subjects, undefined, passwordEncrypted);
     res.json(discenteService.createDiscente(discente));
 });
 
@@ -37,15 +39,20 @@ routes.get('/discentes/:id', (req: Request, res: Response) => {
 routes.post('/login', (req: Request, res: Response) => {
     const discenteService = new DiscenteService();
     const { email, password} = req.body;
-    if (discenteService.login(email, password)){
-        const token = jwt.sign({email}, SECRET, {
-            expiresIn: 3600000 // expires in 1 hour
-        });
-        return res.json({auth: true, token: token});
-    } else{
+    discenteService.login(email, password)
+    .then(r => {
+        if (r){
+            const token = jwt.sign({email}, SECRET, {
+                expiresIn: 3600000 // expires in 1 hour
+            });
+            return res.json({auth: true, token: token});
+        } else{
+            res.status(400).json({ error: 'Email ou senha incorretas' })
+        }
+    })
+    .catch(error => {
         res.status(400).json({ error: 'Email ou senha incorretas' })
-    }
-
+    })
 })
 
 export default routes;

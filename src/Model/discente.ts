@@ -15,6 +15,7 @@ export class Discente {
         this.id = uuidv4();
         this.email = email;
         this.name = name;
+        this.password = password;
 
         if (subjects == undefined) {
             this.subjects = [];

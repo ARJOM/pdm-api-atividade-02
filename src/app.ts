@@ -45,6 +45,7 @@ class App {
         db.run(`CREATE TABLE IF NOT EXISTS students(
             id TEXT,
             name TEXT,
+            password TEXT,
             email TEXT,
             created_at DATE,
             PRIMARY KEY(id)

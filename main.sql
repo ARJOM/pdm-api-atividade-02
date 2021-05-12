@@ -10,6 +10,7 @@ CREATE TABLE students(
     id TEXT,
     name TEXT,
     email TEXT,
+    password TEXT,
     created_at DATE,
     PRIMARY KEY(id)
 );
