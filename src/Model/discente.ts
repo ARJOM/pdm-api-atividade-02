@@ -108,7 +108,7 @@ export class Discente {
         throw new Error("Method not implemented.");
     }
 
-    getByEmailAndPassword(email: String, password: String) {
+    getByEmailAndPassword(email: String, password: String): Promise<Discente> {
         const sub: Subject = new Subject();
         return new Promise((resolve, reject) => {
             db.get(`Select * from students where email = ? and password = ?`, [email, password], (err, row) => {

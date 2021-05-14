@@ -14,15 +14,16 @@ export default class DiscenteService{
         return new Discente().readById(id);
     }
 
-    login(email: String, senha: String){
+    login(email: String, senha: String): Promise<Discente>{
         const discente = new Discente()
         const password = PasswordEncrypts.passwordEncrypt(senha)
         return discente.getByEmailAndPassword(email, password)
             .then(result => {
-                return true
+                return result
             })
             .catch(error => {
-                return false
+                throw console.error();
+                
             })
     }
 

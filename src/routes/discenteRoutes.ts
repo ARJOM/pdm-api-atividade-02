@@ -2,6 +2,7 @@ import { Request, Response, Router } from 'express';
 import { Discente } from '../Model/discente';
 import DiscenteService from '../Service/discenteService';
 import jwt from 'jsonwebtoken';
+import VerifyJwt from '../utils/verifyAuth';
 import { SECRET }  from '../utils/secret';
 import PasswordEncrypts from '../utils/passwordEncrypt';
 
@@ -25,7 +26,7 @@ routes.get('/discentes', (req: Request, res: Response) => {
     })
 });
 
-routes.get('/discentes/:id', (req: Request, res: Response) => {
+routes.get('/discentes/:id', VerifyJwt.verifyJWT, (req: Request, res: Response) => {
     const discenteService = new DiscenteService();
     const id = req.params.id.split('=');
     const result:Promise<any> = discenteService.readDiscenteById(id[1]);
@@ -41,8 +42,8 @@ routes.post('/login', (req: Request, res: Response) => {
     const { email, password} = req.body;
     discenteService.login(email, password)
     .then(r => {
-        if (r){
-            const token = jwt.sign({email}, SECRET, {
+        if (!!r){ //verifica se não é nulo
+            const token = jwt.sign({id: r.id}, SECRET, {
                 expiresIn: 3600000 // expires in 1 hour
             });
             return res.json({auth: true, token: token});
