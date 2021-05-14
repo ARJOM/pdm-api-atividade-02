@@ -46,7 +46,7 @@ routes.post('/login', (req: Request, res: Response) => {
             const token = jwt.sign({id: r.id}, SECRET, {
                 expiresIn: 3600000 // expires in 1 hour
             });
-            return res.json({auth: true, token: token});
+            return res.json({auth: true, token: token, id: r.id});
         } else{
             res.status(400).json({ error: 'Email ou senha incorretas' })
         }

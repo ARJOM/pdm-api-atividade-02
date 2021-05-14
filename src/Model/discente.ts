@@ -122,7 +122,8 @@ export class Discente {
                         discente = row;
                         let discentes: Discente[] = [];
                         discentes.push(discente)
-                        resolve(sub.readByStudents(discentes));
+                        sub.readByStudents(discentes)
+                        resolve(discente);
                     }
                 }
             });
