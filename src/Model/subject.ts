@@ -47,6 +47,7 @@ export class Subject implements Crud {
                 if (err) {
                     reject(err);
                 } else {
+                    console.log(rows)
                     for (let index = 0; index < discentes.length; index++) {
                         discentes[index].subjects = [];
                         rows.forEach((row) => {
@@ -65,5 +66,20 @@ export class Subject implements Crud {
                 }
             })
         })
+    }
+
+    readByUserId(user_id: String): Promise<any>{
+        return new Promise((resolve, reject) => {
+            db.all(`select subs.id, subs.name, subs.workload
+                    from students_subjects stsubs, subjects subs 
+                    where subs.id = stsubs.subject_id and stsubs.user_id = ?`, user_id, (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    console.log(rows);
+                    resolve(rows);
+                }
+            });
+        });
     }
 }

@@ -38,7 +38,11 @@ export class Discente {
             this.subjects = [];
         }
         for (let index = 0; index < this.subjects.length; index++) {
-            db.run(`INSERT INTO students_subjects(user_id,subject_id,created_at) VALUES(?,?,?)`, [this.id, this.subjects[index].id, new Date().toString()], function (err) {
+            // cria disciplina
+            const sub = new Subject(this.subjects[index].name, this.subjects[index].workload);
+            sub.create();
+            
+            db.run(`INSERT INTO students_subjects(user_id,subject_id,created_at) VALUES(?,?,?)`, [this.id, sub.id, new Date().toString()], function (err) {
                 if (err) {
                     return err.message;
                 }
@@ -59,9 +63,10 @@ export class Discente {
                     } else {
                         let discente: Discente = new Discente();
                         discente = row;
-                        let discentes: Discente[] = [];
-                        discentes.push(discente)
-                        resolve(sub.readByStudents(discentes));
+                        sub.readByUserId(id).then(r => {
+                            discente.subjects = r;
+                            resolve(discente);
+                        })
                     }
                 }
             });
